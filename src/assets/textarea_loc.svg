@@ -1,0 +1,8 @@
+<svg width="345" height="42" viewBox="0 0 345 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="path-1-outside-1_3_6" maskUnits="userSpaceOnUse" x="0" y="0" width="345" height="42" fill="black">
+<rect fill="white" width="345" height="42"/>
+<path d="M5 5H340V37H5V5Z"/>
+</mask>
+<path d="M5 5H340V37H5V5Z" fill="#FEDDF2"/>
+<path d="M5 5V0C2.23858 0 0 2.23858 0 5L5 5ZM340 5H345C345 2.23858 342.761 0 340 0V5ZM340 37V42C342.761 42 345 39.7614 345 37H340ZM5 37H0C0 39.7614 2.23858 42 5 42L5 37ZM5 10H340V0H5V10ZM335 5V37H345V5H335ZM340 32H5V42H340V32ZM10 37V5H0V37H10Z" fill="#D9C0FB" mask="url(#path-1-outside-1_3_6)"/>
+</svg>
