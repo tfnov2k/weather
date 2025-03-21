@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="app.component.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 <style>  
 
 </style>
@@ -11,18 +11,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<main class="main">
-  <div class="header_container">
-    <div class="header">
-      <h1>What is the {{ title }} like?</h1>
-    </div>
+
+<!-- Header Titles -->
+<div class="header">
+  <img src="../assets/weather.svg" alt="Weather Title"/>
+  <img src="../assets/weathertracker.svg" alt="Weather Title 2"/>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- Location -->
+  <div class="location-input">
+    <img src="../assets/location.svg" alt=""/>
+    <textarea id="textbox" placeholder="Enter location" class="textarea" maxrows="1" maxlength="26"></textarea>
+
   </div>
-  <div class="content">
-    <div class="weather_container">
-      <p>Enter location: </p>
-      <textarea placeholder="London"></textarea>
-    </div>
+
+  <!-- Info Boxes -->
+  <div class="boxes">
+    <div class="box1"></div>
+    <div class="box2"></div>
   </div>
-</main>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <a href="https://github.com/tfnov2k" target="_blank">
+    <img src="assets/footer.svg" alt="Code" />
+  </a>
+</div>
 
 <router-outlet />
