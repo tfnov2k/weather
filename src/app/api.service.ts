@@ -16,7 +16,7 @@ export class ApiService {
 
   getData(): Observable<any> {
     const params = new HttpParams()
-      .set('q', 'London,us')
+      .set('q', 'Lalmatie')
       .set('mode', 'xml')
       .set('appid', this.apiKey);
 
