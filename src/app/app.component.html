@@ -1,45 +1,60 @@
-<link rel="stylesheet" href="app.component.css">
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-<style>  
-
-</style>
-
+<!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <title>Weather</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="app.component.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('assets/bg75.PNG');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 100% 65%;
+      background-attachment: fixed;
+      border: 5px solid #BBDEFA;
+      margin: 0;
+      min-height: 80vh;
+      box-sizing: border-box;
+      z-index: -1;
+    }
+  </style>
 </head>
 
-<!-- Header Titles -->
-<div class="header">
-  <img src="../assets/weather.svg" alt="Weather Title"/>
-  <img src="../assets/weathertracker.svg" alt="Weather Title 2"/>
-</div>
-
-<!-- Main -->
-<div class="main">
-
-  <!-- Location -->
-  <div class="location-input">
-    <img src="../assets/location.svg" alt=""/>
-    <textarea id="textbox" placeholder="Enter location" class="textarea" maxrows="1" maxlength="26"></textarea>
-
+<body>
+  <!-- Header Titles -->
+  <div class="header">
+    <img src="../assets/weather.svg" alt="Weather Title"/>
+    <img src="../assets/weathertracker.svg" alt="Weather Title 2"/>
   </div>
 
-  <!-- Info Boxes -->
-  <div class="boxes">
-    <div class="box1"></div>
-    <div class="box2"></div>
+  <!-- Main -->
+  <div class="main" >
+
+    <!-- Location -->
+    <div class="location-input">
+      <img src="../assets/location.svg" alt=""/>
+      <textarea id="textbox" placeholder="Where are you?" class="textarea" maxlength="26"></textarea>
+
+    </div>
+
+    <!-- Info Boxes -->
+    <div class="boxes">
+      <div class="box1"></div>
+      <div class="box2"></div>
+    </div>
   </div>
-</div>
 
-<!-- Footer -->
-<div class="footer">
-  <a href="https://github.com/tfnov2k" target="_blank">
-    <img src="assets/footer.svg" alt="Code" />
-  </a>
-</div>
+  <!-- Footer -->
+  <div class="footer">
+    <a href="https://github.com/tfnov2k" target="_blank">
+      <img src="assets/footer3.svg" alt="Code" />
+    </a>
+  </div>
 
-<router-outlet />
+  <router-outlet />
+</body>
+</html>
