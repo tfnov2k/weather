@@ -7,7 +7,7 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'https://api.openweathermap.org/data/2.5/forecast'; // Added https://
+  private apiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
   private apiKey = '4aed509082adebc325e98c604c0ad033';
   
   constructor(private http: HttpClient) {

@@ -22,6 +22,7 @@
     margin-block: 10px;
     padding-top: 0px;
     padding-bottom: 0px;
+    background-color: transparent;
 }
   
 .location-input {
@@ -59,7 +60,7 @@
 .footer {
     text-align: center;
     padding-bottom: 0px;
-    padding-top: 50px;
+    padding-bottom: 5px;
     margin-top: 50px;
 }
   
@@ -117,4 +118,6 @@
     border: none;
     outline: none;
   }
+
+
   
