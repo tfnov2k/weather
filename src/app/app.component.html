@@ -43,7 +43,14 @@
 
     <!-- Info Boxes -->
     <div class="boxes">
-      <div class="box1"></div>
+      <div class="box1">
+        <div *ngIf="countryName && locationName && currentWeather" class="weather-info">
+          <p class="country-display">Country: {{countryName}}</p>
+          <p class="country-display">Location: {{locationName}}</p>
+          <p class="location-display">Current Weather: {{currentWeather}}</p>
+          <p class="location-display">Current Weather: {{sunriseTime}}</p>
+        </div>
+      </div>
       <div class="box2"></div>
     </div>
   </div>

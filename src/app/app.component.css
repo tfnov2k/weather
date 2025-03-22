@@ -46,6 +46,10 @@
     border: 4px solid #FFA3BE; 
     border-radius: 5px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
   
 .box2 {
@@ -55,6 +59,16 @@
     border: 4px solid #EC8FBE; 
     border-radius: 5px; 
     box-sizing: border-box; 
+}
+
+.country-display {
+    font-weight: bold;
+    margin: 0;
+  }
+
+.location-display {
+    font-weight: bold;
+    margin: 0;
 }
   
 .footer {
@@ -114,10 +128,10 @@
   overflow-block: hidden;
 }
 
-  .textarea:focus {
+.textarea:focus {
     border: none;
     outline: none;
-  }
+}
 
 
   
