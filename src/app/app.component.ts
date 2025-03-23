@@ -1,15 +1,15 @@
 import { Component, OnInit, AfterViewInit, PLATFORM_ID, Inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { JsonPipe, NgIf } from '@angular/common';
-import { isPlatformBrowser } from '@angular/common';
+import { JsonPipe, NgIf, isPlatformBrowser } from '@angular/common';
 import { ApiService } from './api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { parseStringPromise } from 'xml2js';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HttpClientModule, NgIf],
+  imports: [RouterOutlet, HttpClientModule, NgIf, FormsModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -21,17 +21,42 @@ export class AppComponent implements OnInit, AfterViewInit {
   currentWeather: string = '';
   sunriseTime: string = '';
   sunsetTime: string = '';
+  weatherData: any;
+  locationInput: string = 'London';
 
   constructor(
     private apiService: ApiService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {console.log('AppComponent constructor called');}
 
+  getWeatherIcon(): string {
+    if (!this.currentWeather) {
+      return "../assets/sky.png";
+    }
+    
+    const weather = this.currentWeather.toLowerCase();
+    
+    if (weather.includes('sun') || weather.includes('clear')) {
+      return "../assets/sun.png";
+    } else if (weather.includes('cloud')) {
+      return "../assets/cloud.png";
+    } else if (weather.includes('rain')) {
+      return "../assets/rain.png";
+    } else if (weather.includes('snow')) {
+      return "../assets/snow.png";
+    } else {
+      return "../assets/sky.png"; 
+    }
+  }
+
   ngOnInit(): void {
     console.log('ngOnInit started, platform is browser:', isPlatformBrowser(this.platformId));
-    
-    // Make the API call regardless of platform
-    this.apiService.getData().subscribe({
+    this.fetchWeatherData(this.locationInput);
+  }
+
+  fetchWeatherData(location: string): void {
+    // Make the API call
+    this.apiService.getData(location).subscribe({
       next: (response) => {
         console.log('API response received:', response ? 'data exists' : 'no data');
         
@@ -66,13 +91,30 @@ export class AppComponent implements OnInit, AfterViewInit {
               console.log('Location:', this.locationName);
             }
 
-            // Get the sunrise time value and store it
-          const sunriseElement = xmlDoc.querySelector("sun > sunrise");
-          if (sunriseElement && sunriseElement.textContent) {
-          // Extract just the time portion (last 8 characters) from the data
-            this.sunriseTime = sunriseElement.textContent.slice(-8);
-            console.log('Sunrise time:', this.sunriseTime);
-          }
+            // Get the sunrise value and store it
+            const sunElement = xmlDoc.querySelector("sun");
+            if (sunElement) {
+              const riseDateTime = sunElement.getAttribute("rise");
+              if (riseDateTime) {
+                // Extract just the time portion (after T)
+                this.sunriseTime = riseDateTime.split("T")[1];
+                console.log('Sunrise time:', this.sunriseTime);
+              } else {
+                console.log('Sunrise time attribute not found');
+              }
+
+              // Get the sunrise value and store it
+              const setDateTime = sunElement.getAttribute("set");
+              if (setDateTime) {
+                // Extract just the time portion (after T)
+                this.sunsetTime = setDateTime.split("T")[1];
+                console.log('Sunset time:', this.sunsetTime);
+              } else {
+                console.log('Sunset time attribute not found');
+              }
+            } else {
+              console.log('Sun element not found');
+            }
 
             // Get current time and find matching forecast
             const currentTime = new Date();
@@ -107,13 +149,12 @@ export class AppComponent implements OnInit, AfterViewInit {
           }
         } else {
           console.log('Parsing on server');
-          // Server-side parsing (Not being used??)
+          // Server-side parsing (Not used on browser, just to log in console)
           parseStringPromise(response).then(result => {
             this.countryName = result.weatherdata.location[0].country[0];
             console.log('Country:', this.countryName);
             this.locationName = result.weatherdata.location[0].name[0];
             console.log('Location:', this.locationName);
-            console.log('Weather:', this.currentWeather);
           }).catch(err => console.error('Error parsing XML on server:', err));
         }
       },
@@ -129,11 +170,23 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Only access document when in browser environment
     if (isPlatformBrowser(this.platformId)) {
-      const textarea = document.getElementById('textbox');
+      const textarea = document.getElementById('textbox') as HTMLTextAreaElement;
       if (textarea) {
         textarea.addEventListener('keydown', (e) => {
           if (e.key === 'Enter') {
             e.preventDefault();
+            if (textarea.value.trim()) {
+              this.locationInput = textarea.value.trim();
+              this.fetchWeatherData(this.locationInput);
+            }
+            textarea.blur();
+          }
+        });
+        
+        textarea.addEventListener('blur', () => {
+          if (textarea.value.trim() && textarea.value.trim() !== this.locationInput) {
+            this.locationInput = textarea.value.trim();
+            this.fetchWeatherData(this.locationInput);
           }
         });
       }

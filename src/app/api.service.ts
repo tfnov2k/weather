@@ -14,9 +14,9 @@ export class ApiService {
     console.log('ApiService instantiated');
   }
 
-  getData(): Observable<any> {
+  getData(location: string = 'London'): Observable<any> {
     const params = new HttpParams()
-      .set('q', 'Lalmatie')
+      .set('q', location)
       .set('mode', 'xml')
       .set('appid', this.apiKey);
 

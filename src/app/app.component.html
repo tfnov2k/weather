@@ -37,21 +37,32 @@
     <!-- Location -->
     <div class="location-input">
       <img src="../assets/location.svg" alt=""/>
-      <textarea id="textbox" placeholder="Where are you?" class="textarea" maxlength="26"></textarea>
-
+      <textarea spellcheck="false" id="textbox"
+        class="textarea" 
+        placeholder="Where are you?"  
+        maxlength="26"
+        [value]="locationInput">
+      </textarea>
     </div>
 
     <!-- Info Boxes -->
     <div class="boxes">
       <div class="box1">
-        <div *ngIf="countryName && locationName && currentWeather" class="weather-info">
-          <p class="country-display">Country: {{countryName}}</p>
-          <p class="country-display">Location: {{locationName}}</p>
-          <p class="location-display">Current Weather: {{currentWeather}}</p>
-          <p class="location-display">Current Weather: {{sunriseTime}}</p>
+        <div class="icon-container">
+          <img [src]="getWeatherIcon()" class="icon" alt="Weather Icon"/>
+        </div>
+        <div class="weather-container" *ngIf="currentWeather">
+          <p class="weather-display">{{currentWeather}}</p>
         </div>
       </div>
-      <div class="box2"></div>
+      <div class="box2">
+        <div *ngIf="countryName && locationName && sunriseTime && sunsetTime">
+          <p class="location-display">{{locationName}}</p>
+          <p class="country-display">{{countryName}}</p>
+          <a class="sun-display">Sunrise: {{sunriseTime}} </a>
+          <a class="sun-display">Sunset: {{sunsetTime}}</a>
+        </div>
+      </div>
     </div>
   </div>
 
